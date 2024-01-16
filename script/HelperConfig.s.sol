@@ -11,7 +11,7 @@ contract HelperConfig is Script{
 
     NetworkConfig public activeNetworkConfig;
     uint8 public constant DECIMAL = 8;
-    int256 public constant INITIAL_PRICE = 2000e8;
+    int256 public constant INITIAL_PRICE = 2000e18;
 
     struct NetworkConfig{
         address priceAdd; 

@@ -1,0 +1,23 @@
+# Storage before removing funders.length from withdraw function 
+
+FumdMeTest:testAddressToAmountFunded() (gas: 108192)
+FumdMeTest:testGetFunders() (gas: 104696)
+FumdMeTest:testMinUsd() (gas: 5470)
+FumdMeTest:testMultipleUserWithdraw() (gas: 556296)
+FumdMeTest:testOnlyOwnerCanWithdraw() (gas: 104851)
+FumdMeTest:testOwnerAddress() (gas: 5588)
+FumdMeTest:testPricefeedVersion() (gas: 19071)
+FumdMeTest:testRevertFundMsg() (gas: 27867)
+FumdMeTest:testWithdrawByOwner() (gas: 90886)
+
+# after
+
+FumdMeTest:testAddressToAmountFunded() (gas: 108192)
+FumdMeTest:testGetFunders() (gas: 104696)
+FumdMeTest:testMinUsd() (gas: 5470)
+FumdMeTest:testMultipleUserWithdraw() (gas: 555420) # here is the change
+FumdMeTest:testOnlyOwnerCanWithdraw() (gas: 104851)
+FumdMeTest:testOwnerAddress() (gas: 5588)
+FumdMeTest:testPricefeedVersion() (gas: 19071)
+FumdMeTest:testRevertFundMsg() (gas: 27867)
+FumdMeTest:testWithdrawByOwner() (gas: 90810)

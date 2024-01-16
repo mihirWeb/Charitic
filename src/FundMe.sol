@@ -8,13 +8,13 @@ error FundMe_NotOwner();
 
 contract FundMe {
     using PriceConverter for uint256;
+
     AggregatorV3Interface private s_priceFeed;
 
-    mapping(address => uint256) public addressToAmountFunded;
-    address[] public funders;
+    mapping(address => uint256) private addressToAmountFunded;
+    address[] private funders;
 
-    // Could we make this constant?  /* hint: no! We should make it immutable! */
-    address public /* immutable */ i_owner;
+    address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 5e18; //5 * 10 ** 18
     
     constructor(address priceFeed) {
@@ -24,7 +24,6 @@ contract FundMe {
 
     function fund() public payable {
         require(msg.value.getConversionRate() >= MINIMUM_USD, "You need to spend more ETH!");
-        // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
     }
@@ -56,6 +55,8 @@ contract FundMe {
         (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
     }
+
+
     // Explainer from: https://solidity-by-example.org/fallback/
     // Ether is sent to contract
     //      is msg.data empty?
@@ -74,6 +75,22 @@ contract FundMe {
 
     receive() external payable {
         fund();
+    }
+    
+
+    
+    // view functions
+
+    function getAddressToAmountFunded(address funderAddress) external view returns(uint256){
+        return addressToAmountFunded[funderAddress];
+    }
+
+    function getFunders(uint256 index) view external returns(address){
+        return funders[index];
+    }
+
+    function getOwner() view external returns(address){
+        return i_owner;
     }
 
 }

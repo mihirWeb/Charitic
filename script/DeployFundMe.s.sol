@@ -7,6 +7,12 @@ import {HelperConfig} from "./HelperConfig.s.sol";
 
 contract DeployFundMe is Script {
 
+    address public deployOwner; // for debugging process
+
+    constructor(){
+        deployOwner = msg.sender;
+    }
+
     function run() external returns(FundMe){
         // outside broadcast so that it will not take gas fees 
         HelperConfig helperConfig = new HelperConfig();
